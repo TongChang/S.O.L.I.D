@@ -1,0 +1,100 @@
+@startuml
+
+class ArticleUsecase {
+---
++getTodayArticleByLang(string lang)
+}
+
+interface INewsRepository {
+---
++getTopByLangAsArticle(string lang): News
+}
+
+class NewsRepository {
+---
++getTopByLangAsArticle(string lang): News
+}
+
+class ArticleBuilder {
+---
++build(string lang, News news)
+}
+
+interface IArticle {
+---
++getTitle():string;
++getDate():string;
++getContents():string;
+}
+
+class JapaneseArticle {
+-title: string;
+-date: int;
+-contents: string;
+---
++getTitle():string;
++getDate():string;
++getContents():string;
+}
+
+class USEnglishArticle {
+-title: string;
+-date: int;
+-contents: string;
+---
++getTitle():string;
++getDate():string;
++getContents():string;
+}
+
+interface INewsReader {
+---
++fetchFirst(): News
+}
+
+class NewsReader {
+---
+-fetchAsObjectFromFilePath(string filePath): object
++fetchFirst(): News
+}
+
+class News {
+-date: string
+-title_ja: string
+-contents_ja: string
+-url_ja: string
+-title_en: string
+-contents_en: string
+-url_en: string
+---
++getDate(): string
++getTitleJa(): string
++getContentsJa(): string
++getUrlJa(): string
++getTitleEn(): string
++getContentsEn(): string
++getUrlEn(): string
+}
+
+ArticleUsecase -right-> INewsRepository
+ArticleUsecase -down-> IArticle
+
+NewsRepository -up-|> INewsRepository
+
+NewsRepository -down-> ArticleBuilder
+NewsRepository -right-> INewsReader
+
+NewsReader -up-|> INewsReader
+NewsReader -left-> News
+
+ArticleBuilder -right-> News
+ArticleBuilder -up-> JapaneseArticle
+ArticleBuilder -up-> USEnglishArticle
+
+
+JapaneseArticle -up-|> IArticle
+USEnglishArticle -up-|> IArticle
+
+JapaneseArticle -right- USEnglishArticle
+
+@enduml
