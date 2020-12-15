@@ -1,80 +1,105 @@
 @startuml
 
-class ArticleUsecase {
----
-+getTodayArticleByLang(string lang)
+package usecase {
+    class ArticleUsecase {
+    ---
+    +getTodayArticleByLang(string lang)
+    }
 }
+note right of usecase
+    ビジネスユースケース用の Facade (入り口) クラスをまとめるパッケージ
+endnote
 
-interface INewsRepository {
----
-+getTopByLangAsArticle(string lang): News
-}
+package repository {
 
-class NewsRepository {
----
-+getTopByLangAsArticle(string lang): News
-}
+    interface INewsRepository {
+    ---
+    +getTopByLangAsArticle(string lang): News
+    }
 
-class ArticleBuilder {
----
-+build(string lang, News news)
-}
+    class NewsRepository {
+    ---
+    +getTopByLangAsArticle(string lang): News
+    }
 
-interface IArticle {
----
-+getTitle():string;
-+getDate():string;
-+getContents():string;
 }
+note left of repository
+    データソースの取得や変換操作を隠蔽するためのパッケージ。
+    usecase の主体となるデータソースを選択させるが、複合した情報を取得する機能を持つ。
+endnote
 
-class JapaneseArticle {
--title: string;
--date: int;
--contents: string;
----
-+getTitle():string;
-+getDate():string;
-+getContents():string;
-}
+package article {
 
-class USEnglishArticle {
--title: string;
--date: int;
--contents: string;
----
-+getTitle():string;
-+getDate():string;
-+getContents():string;
-}
+    class ArticleBuilder {
+    ---
+    +build(string lang, News news)
+    }
 
-interface INewsReader {
----
-+fetchFirst(): News
-}
+    interface IArticle {
+    ---
+    +getTitle():string;
+    +getDate():string;
+    +getContents():string;
+    }
 
-class NewsReader {
----
--fetchAsObjectFromFilePath(string filePath): object
-+fetchFirst(): News
-}
+    entity JapaneseArticle {
+    -title: string;
+    -date: int;
+    -contents: string;
+    ---
+    +getTitle():string;
+    +getDate():string;
+    +getContents():string;
+    }
 
-class News {
--date: string
--title_ja: string
--contents_ja: string
--url_ja: string
--title_en: string
--contents_en: string
--url_en: string
----
-+getDate(): string
-+getTitleJa(): string
-+getContentsJa(): string
-+getUrlJa(): string
-+getTitleEn(): string
-+getContentsEn(): string
-+getUrlEn(): string
+    entity EnglishArticle {
+    -title: string;
+    -date: int;
+    -contents: string;
+    ---
+    +getTitle():string;
+    +getDate():string;
+    +getContents():string;
+    }
+
 }
+note right of article
+    出力用の記事のデータの編集を行うための処理をまとめたパッケージ。
+endnote
+
+package news {
+    interface INewsReader {
+    ---
+    +fetchFirst(): News
+    }
+
+    class NewsReader {
+    ---
+    -fetchAsObjectFromFilePath(string filePath): object
+    +fetchFirst(): News
+    }
+
+    entity News {
+    -date: string
+    -title_ja: string
+    -contents_ja: string
+    -url_ja: string
+    -title_en: string
+    -contents_en: string
+    -url_en: string
+    ---
+    +getDate(): string
+    +getTitleJa(): string
+    +getContentsJa(): string
+    +getUrlJa(): string
+    +getTitleEn(): string
+    +getContentsEn(): string
+    +getUrlEn(): string
+    }
+}
+note right of news
+    取得してくるニュースの「取得の手続き」と「ニュース情報の構造」を持つパッケージ。
+endnote
 
 ArticleUsecase -right-> INewsRepository
 ArticleUsecase -down-> IArticle
@@ -89,12 +114,12 @@ NewsReader -left-> News
 
 ArticleBuilder -right-> News
 ArticleBuilder -up-> JapaneseArticle
-ArticleBuilder -up-> USEnglishArticle
+ArticleBuilder -up-> EnglishArticle
 
 
 JapaneseArticle -up-|> IArticle
-USEnglishArticle -up-|> IArticle
+EnglishArticle -up-|> IArticle
 
-JapaneseArticle -right- USEnglishArticle
+JapaneseArticle -right- EnglishArticle
 
 @enduml
