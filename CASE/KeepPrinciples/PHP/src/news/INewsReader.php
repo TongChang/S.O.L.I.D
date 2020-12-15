@@ -2,8 +2,6 @@
 
 namespace News;
 
-require_once "./news/News.php";
-
 use News\News;
 
 /**

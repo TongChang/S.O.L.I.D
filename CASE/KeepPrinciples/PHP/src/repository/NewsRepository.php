@@ -2,14 +2,10 @@
 
 namespace Repository;
 
-require_once "./repository/INewsRepository.php";
-require_once "./article/ArticleBuilder.php";
-require_once "./article/IArticle.php";
-require_once "./news/INewsReader.php";
-
 use Article\IArticle;
 use Article\ArticleBuilder;
 use News\INewsReader;
+use Repository\INewsRepository;
 
 /**
  * ニュース関連のリポジトリ

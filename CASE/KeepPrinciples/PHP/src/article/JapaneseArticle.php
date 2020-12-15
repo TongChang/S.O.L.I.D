@@ -2,23 +2,20 @@
 
 namespace Article;
 
-require_once "./article/IArticle.php";
-
 use Article\IArticle;
 
 /**
- * アメリカ英語記事
+ * 日本語記事
  */
-class EnglishArticle implements IArticle
+class JapaneseArticle implements IArticle
 {
 
     /**
      * 日付のフォーマット
      *
      * @var string 日付のフォーマット
-     * @see {@link https://mommysenglish.com/date-1423}
      */
-    private $FORMAT_DATE = "F d, Y";
+    private $formatDate = "Y/m/d";
 
     /**
      * タイトル
@@ -48,7 +45,7 @@ class EnglishArticle implements IArticle
      * @param int    $date     日付
      * @param string $contents 内容
      */
-    function __construct(string $title, int $date, string $contents)
+    public function __construct(string $title, int $date, string $contents)
     {
         $this->title = $title;
         $this->date = $date;
@@ -72,7 +69,7 @@ class EnglishArticle implements IArticle
      */
     public function getDate(): string
     {
-        return date($this->FORMAT_DATE, $this->date);
+        return date($this->formatDate, $this->date);
     }
 
     /**

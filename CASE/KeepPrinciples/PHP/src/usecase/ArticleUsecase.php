@@ -2,8 +2,6 @@
 
 namespace Usecase;
 
-require_once "./repository/INewsRepository.php";
-
 use Repository\INewsRepository;
 
 /**

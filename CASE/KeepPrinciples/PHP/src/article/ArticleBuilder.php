@@ -2,11 +2,6 @@
 
 namespace Article;
 
-require_once "./article/IArticle.php";
-require_once "./article/EnglishArticle.php";
-require_once "./article/JapaneseArticle.php";
-require_once "./news/News.php";
-
 use Article\IArticle;
 use Article\EnglishArticle;
 use Article\JapaneseArticle;

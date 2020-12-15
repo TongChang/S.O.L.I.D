@@ -12,19 +12,19 @@ interface IArticle
      *
      * @return string 記事タイトル
      */
-    function getTitle(): string;
+    public function getTitle(): string;
 
     /**
      * 記事の日付を取得する。
      *
      * @return string 記事の日付
      */
-    function getDate(): string;
+    public function getDate(): string;
 
     /**
      * 記事の内容を取得する。
      *
      * @return string 記事の内容
      */
-    function getContents(): string;
+    public function getContents(): string;
 }

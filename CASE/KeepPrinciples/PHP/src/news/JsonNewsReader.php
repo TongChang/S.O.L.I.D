@@ -8,7 +8,16 @@ namespace News;
 class JsonNewsReader implements INewsReader
 {
 
-    private $jsonFilePath = "../news.json";
+    /**
+     * ファイルパス
+     * @var string
+     */
+    private $jsonFilePath;
+
+    public function __construct(string $filePath)
+    {
+        $this->jsonFilePath = $filePath;
+    }
 
     /**
      * JSON ファイルパスから内容を配列で取得します。

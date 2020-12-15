@@ -19,42 +19,42 @@ class News
      *
      * @var string
      */
-    private $title_ja;
+    private $titleJa;
 
     /**
      * (日本語)本文
      *
      * @var string
      */
-    private $contents_ja;
+    private $contentsJa;
 
     /**
      * (日本語)URL
      *
      * @var string
      */
-    private $url_ja;
+    private $urlJa;
 
     /**
      * (英語)タイトル
      *
      * @var string
      */
-    private $title_en;
+    private $titleEn;
 
     /**
      * (英語)本文
      *
      * @var string
      */
-    private $contents_en;
+    private $contentsEn;
 
     /**
      * (英語)URL
      *
      * @var string
      */
-    private $url_en;
+    private $urlEn;
 
     /**
      * コンストラクタ
@@ -65,13 +65,13 @@ class News
     {
         $this->date = str_replace(".", "-", $news->date);
 
-        $this->title_ja = $news->title_ja;
-        $this->contents_ja = $news->contents_ja;
-        $this->url_ja = $news->url_ja;
+        $this->titleJa = $news->title_ja;
+        $this->contentsJa = $news->contents_ja;
+        $this->urlJa = $news->url_ja;
 
-        $this->title_en = $news->title_en;
-        $this->contents_en = $news->contents_en;
-        $this->url_en = $news->url_en;
+        $this->titleEn = $news->title_en;
+        $this->contentsEn = $news->contents_en;
+        $this->urlEn = $news->url_en;
     }
 
     /**
@@ -91,7 +91,7 @@ class News
      */
     public function getTitleJa(): string
     {
-        return $this->title_ja;
+        return $this->titleJa;
     }
 
     /**
@@ -101,7 +101,7 @@ class News
      */
     public function getContentsJa(): string
     {
-        return $this->contents_ja;
+        return $this->contentsJa;
     }
 
     /**
@@ -111,7 +111,7 @@ class News
      */
     public function getUrlJa(): string
     {
-        return $this->url_ja;
+        return $this->urlJa;
     }
 
     /**
@@ -121,7 +121,7 @@ class News
      */
     public function getTitleEn(): string
     {
-        return $this->title_ja;
+        return $this->titleEn;
     }
 
     /**
@@ -131,7 +131,7 @@ class News
      */
     public function getContentsEn(): string
     {
-        return $this->contents_ja;
+        return $this->contentsEn;
     }
 
     /**
@@ -141,6 +141,6 @@ class News
      */
     public function getUrlEn(): string
     {
-        return $this->url_ja;
+        return $this->urlEn;
     }
 }

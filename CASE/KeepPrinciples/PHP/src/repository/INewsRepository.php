@@ -2,8 +2,6 @@
 
 namespace Repository;
 
-require_once "./article/IArticle.php";
-
 use Article\IArticle;
 
 /**
@@ -17,5 +15,5 @@ interface INewsRepository
      * @param string $lang
      * @return void
      */
-    function getTopByLangAsArticle(string $lang): IArticle;
+    public function getTopByLangAsArticle(string $lang): IArticle;
 }
