@@ -1,0 +1,80 @@
+@startuml
+
+class TaskRepository {
+---
+    +getStatusesOfEpic(string id): ITicket[]
+}
+
+interface ITicket {
+---
+    +getId(): string
+    +getStatus(): Status
+    +isActive(): bool
+    +isClosed(): bool
+    +inTeam(string): bool
+}
+
+class InfraTask {
+    -id
+    -status
+    -title
+    -parentId
+---
+    +getId(): string
+    +getTitle(): string
+    +getParentId(): string
+    +getStatus(): Status
+    +isActive(): bool
+    +isClosed(): bool
+    +inTeam(string): bool
+}
+
+class DesignTask {
+    -id
+    -status
+    -title
+    -parentId
+---
+    +getId():string
+    +getTitle():string
+    +getParentId(): string
+    +getStatus():integer
+    +isActive(): bool
+    +isClosed(): bool
+    +inTeam(string): bool
+}
+
+class AppTask {
+    -id
+    -status
+    -title
+    -parentId
+    -team
+---
+    +getId():string
+    +getTitle():string
+    +getParentId(): string
+    +getStatus():integer
+    +isActive(): bool
+    +isClosed(): bool
+    +inTeam(string): bool
+}
+
+class Status {
+    -status: string
+    ---
+    +transitionTo(string):void
+    +isActive(): bool
+    +isClosed(): bool
+}
+
+InfraTask -up-|> ITicket
+DesignTask -up-|> ITicket
+AppTask -up-|> ITicket
+TaskRepository -right-> ITicket
+
+InfraTask *-- Status
+DesignTask *-- Status
+AppTask *-- Status
+
+@enduml
